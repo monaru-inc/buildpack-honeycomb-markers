@@ -2,8 +2,9 @@
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
 echo "-----> Creating deploy Honeycomb Marker for ${SOURCE_VERSION}"
-curl https://api.honeycomb.io/1/markers/nomics -X POST  \
-  -H "X-Honeycomb-Team: ${HONEYCOMB_WRITE_KEY}"  \
+curl https://api.honeycomb.io/1/markers/nomics \
+  -X POST \
+  -H "X-Honeycomb-Team: ${HONEYCOMB_WRITE_KEY}" \
   -d "{\"message\":\"nomics.com - ${SOURCE_VERSION}\", \"type\":\"deploy\"}"
 
 echo "       Done!"
