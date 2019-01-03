@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
+set -e
+
+env_dir=$(cd "$3/" && pwd)
+
+for key in SENTRY_AUTH_TOKEN; do
+    [[ -f "${env_dir}/${key}" ]] && export "$key=$(cat "${env_dir}/${key}")"
+    [[ -z "${!key}" ]] && echo "-----> ${key} is missing or empty: unable to continue." && exit 1
+done
+
 echo "-----> Creating deploy Honeycomb Marker for ${SOURCE_VERSION}"
 
 echo "HONEYCOMB_WRITE_KEY: ${HONEYCOMB_WRITE_KEY}"
