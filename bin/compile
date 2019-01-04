@@ -10,11 +10,10 @@ export "$key=$(cat "${env_dir}/${key}")"
 [[ -z "${!key}" ]] && echo "-----> ${key} is missing or empty: unable to continue." && exit 1
 
 echo "-----> Creating deploy Honeycomb Marker for ${SOURCE_VERSION}"
-
-echo "HONEYCOMB_WRITE_KEY: ${HONEYCOMB_WRITE_KEY}"
 curl https://api.honeycomb.io/1/markers/nomics \
   -X POST \
   -H "X-Honeycomb-Team: ${HONEYCOMB_WRITE_KEY}" \
-  -d "{\"message\":\"nomics.com - ${SOURCE_VERSION}\", \"type\":\"deploy\"}"
+  -d "{\"message\":\"nomics.com - ${SOURCE_VERSION}\", \"type\":\"deploy\"}" \
+  >/dev/null
 
 echo "       Done!"
