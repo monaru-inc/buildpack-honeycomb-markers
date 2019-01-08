@@ -12,7 +12,7 @@ for key in HONEYCOMB_WRITE_KEY HEROKU_APP_NAME; do
 done
 
 # get short hash of SOURCE_VERSION
-short_hash=$(git rev-parse --short ${key})
+short_hash=$(SOURCE_VERSION:0:7)
 
 # set marker
 echo "-----> Creating deploy Honeycomb Marker for ${SOURCE_VERSION}"
