@@ -6,7 +6,7 @@ set -e
 env_dir=$(cd "$3/" && pwd)
 
 # gather environment variables
-for key in HONEYCOMB_WRITE_KEY HEROKU_APP_NAME HEROKU_RELEASE_VERSION; do
+for key in HONEYCOMB_WRITEKEY HEROKU_APP_NAME HEROKU_RELEASE_VERSION; do
   [[ -f "${env_dir}/${key}" ]] && export "$key=$(cat "${env_dir}/${key}")"
   [[ -z "${!key}" ]] && echo "-----> ${key} is missing or empty: unable to continue." && exit 1
 done
@@ -15,7 +15,7 @@ done
 echo "-----> Creating deploy Honeycomb Marker for ${HEROKU_RELEASE_VERSION}"
 curl https://api.honeycomb.io/1/markers/anymo-server \
   -X POST \
-  -H "X-Honeycomb-Team: ${HONEYCOMB_WRITE_KEY}" \
+  -H "X-Honeycomb-Team: ${HONEYCOMB_WRITEKEY}" \
   -d "{\"message\":\"${HEROKU_APP_NAME}:${HEROKU_RELEASE_VERSION}\", \"type\":\"deploy\"}" \
   >/dev/null
 
