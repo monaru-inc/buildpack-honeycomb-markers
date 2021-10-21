@@ -13,7 +13,7 @@ done
 
 # set marker
 echo "-----> Creating deploy Honeycomb Marker for ${HEROKU_RELEASE_VERSION}"
-curl https://api.honeycomb.io/1/markers/anymo-server \
+curl https://api.honeycomb.io/1/markers/unflow-server \
   -X POST \
   -H "X-Honeycomb-Team: ${HONEYCOMB_WRITEKEY}" \
   -d "{\"message\":\"${HEROKU_APP_NAME}:${HEROKU_RELEASE_VERSION}\", \"type\":\"deploy\"}" \
